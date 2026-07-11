@@ -22,6 +22,8 @@ import { DashboardPage } from '@/pages/Dashboard/DashboardPage'
 import { TopicsPage } from '@/pages/Topics/TopicsPage'
 import { AvatarPage } from '@/pages/Avatar/AvatarPage'
 import { ShopPage } from '@/pages/Shop/ShopPage'
+import { TheoremPage } from '@/pages/Theorem/TheoremPage'
+import { QuizPage } from '@/pages/Quiz/QuizPage'
 import { NotFoundPage } from '@/pages/NotFound/NotFoundPage'
 
 export function AppRouter() {
@@ -38,6 +40,8 @@ export function AppRouter() {
         <Route element={<AppLayout />}>
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/topics" element={<TopicsPage />} />
+          <Route path="/theorem/:id" element={<TheoremPage />} />
+          <Route path="/quiz/:id" element={<QuizPage />} />
           <Route path="/avatar" element={<AvatarPage />} />
           <Route path="/shop" element={<ShopPage />} />
         </Route>

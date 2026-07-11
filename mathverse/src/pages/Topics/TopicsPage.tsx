@@ -15,6 +15,7 @@
 
 import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import {
   RiSearchLine,
   RiArrowRightLine,
@@ -73,6 +74,7 @@ function TheoremCard({ theorem, index }: { theorem: TheoremMeta; index: number }
 
   return (
     <motion.div variants={cardReveal} className="h-full">
+      <Link to={`/theorem/${theorem.id}`} className="block h-full">
       <Card
         hover
         padding="md"
@@ -110,6 +112,7 @@ function TheoremCard({ theorem, index }: { theorem: TheoremMeta; index: number }
           <RiArrowRightLine className="w-4 h-4 text-slate-600 group-hover:text-indigo-400 transition-colors" />
         </div>
       </Card>
+      </Link>
     </motion.div>
   )
 }
