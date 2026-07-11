@@ -99,4 +99,17 @@ export interface GamificationState {
   longestStreak: number
   lastActiveDate: string | null
   unlockedAchievements: string[]
+  avatarId: string | null
+  purchasedItems: string[]
+  equippedFrame: string | null
+  equippedTheme: string | null
+  equippedBadge: string | null
+}
+
+export interface ShopItem {
+  id: string
+  type: 'frame' | 'theme' | 'badge'
+  name: string
+  icon: string
+  cost: number
 }

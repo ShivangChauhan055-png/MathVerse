@@ -38,7 +38,7 @@ export function Navbar({ landing = false }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
   const { toggleMobileSidebar, mobileSidebarOpen } = useAppStore()
   const { isDark, toggleTheme } = useTheme()
-  const { coins, level } = useGamificationStore()
+  const { coins, level, avatarId } = useGamificationStore()
 
   // Detect scroll to add backdrop
   useEffect(() => {
@@ -144,6 +144,13 @@ export function Navbar({ landing = false }: NavbarProps) {
                 <span className="text-sm font-bold">Lvl {level}</span>
               </div>
             </div>
+          )}
+
+          {/* User Avatar */}
+          {!landing && avatarId && (
+            <Link to="/avatar" className="hidden sm:block mr-2">
+              <img src={avatarId} alt="User Avatar" className="w-8 h-8 rounded-full border-2 border-indigo-500/50 hover:border-indigo-400 transition-colors" />
+            </Link>
           )}
 
           {/* Theme toggle */}

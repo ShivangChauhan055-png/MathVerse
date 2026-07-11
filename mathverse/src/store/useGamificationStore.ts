@@ -7,7 +7,7 @@
 
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import type { GamificationState, Achievement } from '@/types'
+import type { GamificationState, Achievement, ShopItem } from '@/types'
 
 export const ACHIEVEMENTS: Achievement[] = [
   { id: 'first_question', title: 'First Steps', description: 'Answer your first question correctly.', icon: 'RiFocus2Line', rewardCoins: 50, rewardXP: 20 },
@@ -18,6 +18,23 @@ export const ACHIEVEMENTS: Achievement[] = [
   { id: '3_day_streak', title: 'Consistent', description: 'Achieve a 3-day streak.', icon: 'RiCalendarCheckLine', rewardCoins: 200, rewardXP: 150 },
 ]
 
+export const SHOP_ITEMS: ShopItem[] = [
+  { id: 'frame_gold', type: 'frame', name: 'Golden Ring', icon: 'RiVipCrownLine', cost: 100 },
+  { id: 'frame_neon', type: 'frame', name: 'Neon Glow', icon: 'RiFlashlightLine', cost: 150 },
+  { id: 'frame_fire', type: 'frame', name: 'Fire Aura', icon: 'RiFireLine', cost: 200 },
+  { id: 'frame_ice', type: 'frame', name: 'Ice Crystal', icon: 'RiSnowyLine', cost: 200 },
+  { id: 'frame_stars', type: 'frame', name: 'Starry Sky', icon: 'RiStarLine', cost: 250 },
+  { id: 'frame_rainbow', type: 'frame', name: 'Prism', icon: 'RiRainbowLine', cost: 300 },
+  { id: 'frame_hacker', type: 'frame', name: 'Matrix', icon: 'RiTerminalLine', cost: 350 },
+  { id: 'frame_galaxy', type: 'frame', name: 'Galaxy', icon: 'RiPlanetLine', cost: 500 },
+  
+  { id: 'theme_emerald', type: 'theme', name: 'Emerald Base', icon: 'RiLeafLine', cost: 300 },
+  { id: 'theme_ruby', type: 'theme', name: 'Ruby Core', icon: 'RiVipDiamondLine', cost: 300 },
+  
+  { id: 'badge_scholar', type: 'badge', name: 'Scholar Star', icon: 'RiBookmarkLine', cost: 400 },
+  { id: 'badge_master', type: 'badge', name: 'Master Seal', icon: 'RiMedalLine', cost: 600 },
+]
+
 export const XP_PER_LEVEL = 100;
 
 interface GamificationStore extends GamificationState {
@@ -25,6 +42,10 @@ interface GamificationStore extends GamificationState {
   addXP: (amount: number) => void
   recordActivity: () => void
   unlockAchievement: (id: string) => void
+  setAvatar: (avatarId: string) => void
+  buyItem: (id: string) => boolean
+  equipItem: (id: string, type: 'frame' | 'theme' | 'badge') => void
+  unequipItem: (type: 'frame' | 'theme' | 'badge') => void
   // Transient state for UI animations (not persisted)
   animationQueue: { type: 'xp' | 'coin' | 'achievement' | 'level', payload: any, id: number }[]
   queueAnimation: (type: 'xp' | 'coin' | 'achievement' | 'level', payload: any) => void
@@ -43,6 +64,11 @@ export const useGamificationStore = create<GamificationStore>()(
       longestStreak: 0,
       lastActiveDate: null,
       unlockedAchievements: [],
+      avatarId: null,
+      purchasedItems: [],
+      equippedFrame: null,
+      equippedTheme: null,
+      equippedBadge: null,
       animationQueue: [],
 
       queueAnimation: (type, payload) => {
@@ -137,6 +163,35 @@ export const useGamificationStore = create<GamificationStore>()(
           get().addXP(achievement.rewardXP)
           get().queueAnimation('xp', { amount: achievement.rewardXP, reason: achievement.title })
         }
+      },
+
+      setAvatar: (avatarId) => set({ avatarId }),
+      
+      buyItem: (id: string) => {
+        const state = get()
+        if (state.purchasedItems.includes(id)) return false;
+        const item = SHOP_ITEMS.find(i => i.id === id)
+        if (!item || state.coins < item.cost) return false;
+        
+        set({
+          coins: state.coins - item.cost,
+          purchasedItems: [...state.purchasedItems, id]
+        });
+        return true;
+      },
+      
+      equipItem: (id: string, type: 'frame' | 'theme' | 'badge') => {
+        const state = get();
+        if (!state.purchasedItems.includes(id)) return;
+        if (type === 'frame') set({ equippedFrame: id });
+        if (type === 'theme') set({ equippedTheme: id });
+        if (type === 'badge') set({ equippedBadge: id });
+      },
+      
+      unequipItem: (type: 'frame' | 'theme' | 'badge') => {
+        if (type === 'frame') set({ equippedFrame: null });
+        if (type === 'theme') set({ equippedTheme: null });
+        if (type === 'badge') set({ equippedBadge: null });
       }
     }),
     {
@@ -148,7 +203,12 @@ export const useGamificationStore = create<GamificationStore>()(
         currentStreak: state.currentStreak,
         longestStreak: state.longestStreak,
         lastActiveDate: state.lastActiveDate,
-        unlockedAchievements: state.unlockedAchievements
+        unlockedAchievements: state.unlockedAchievements,
+        avatarId: state.avatarId,
+        purchasedItems: state.purchasedItems,
+        equippedFrame: state.equippedFrame,
+        equippedTheme: state.equippedTheme,
+        equippedBadge: state.equippedBadge
       }) // don't persist animation queue
     }
   )

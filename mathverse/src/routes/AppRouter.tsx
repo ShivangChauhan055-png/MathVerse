@@ -20,6 +20,8 @@ import { AppLayout } from '@/layouts/AppLayout'
 import { LandingPage } from '@/pages/Landing/LandingPage'
 import { DashboardPage } from '@/pages/Dashboard/DashboardPage'
 import { TopicsPage } from '@/pages/Topics/TopicsPage'
+import { AvatarPage } from '@/pages/Avatar/AvatarPage'
+import { ShopPage } from '@/pages/Shop/ShopPage'
 import { NotFoundPage } from '@/pages/NotFound/NotFoundPage'
 
 export function AppRouter() {
@@ -36,6 +38,8 @@ export function AppRouter() {
         <Route element={<AppLayout />}>
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/topics" element={<TopicsPage />} />
+          <Route path="/avatar" element={<AvatarPage />} />
+          <Route path="/shop" element={<ShopPage />} />
         </Route>
       </Routes>
     </AnimatePresence>
