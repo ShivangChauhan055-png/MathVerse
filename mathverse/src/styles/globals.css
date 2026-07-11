@@ -1,0 +1,165 @@
+/**
+ * globals.css
+ *
+ * Layer order:
+ *  1. Tailwind directives (base, components, utilities)
+ *  2. CSS custom properties (design tokens)
+ *  3. Global resets & base styles
+ *  4. Utility classes that Tailwind can't express cleanly
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Design Tokens ──────────────────────────────────────────────────────── */
+:root {
+  /* Spacing scale (8-pt grid) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-4: 1rem;
+  --space-8: 2rem;
+  --space-16: 4rem;
+
+  /* Brand colours (mirror tailwind.config.ts for non-Tailwind use) */
+  --color-bg: #0a0b1a;
+  --color-surface: #0f1025;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-accent: #6366f1;
+  --color-accent-glow: rgba(99, 102, 241, 0.35);
+  --color-secondary: #22d3ee;
+  --color-text-primary: #f1f5f9;
+  --color-text-muted: #94a3b8;
+
+  /* Sidebar width */
+  --sidebar-width: 260px;
+  --sidebar-collapsed-width: 72px;
+  --navbar-height: 64px;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Base Resets ────────────────────────────────────────────────────────── */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-space-900 text-slate-100 font-sans;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  /* Scrollbar styling — dark & minimal */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.3);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(99, 102, 241, 0.6);
+  }
+
+  /* Focus ring — accessible & branded */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Selection colour */
+  ::selection {
+    background: rgba(99, 102, 241, 0.4);
+    color: #f1f5f9;
+  }
+}
+
+/* ─── Component Utilities ────────────────────────────────────────────────── */
+@layer components {
+  /* Glass card — the core visual motif */
+  .glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(24px) saturate(200%);
+    -webkit-backdrop-filter: blur(24px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, #818cf8 0%, #22d3ee 50%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-warm {
+    background: linear-gradient(135deg, #f472b6 0%, #fb923c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Accent glow ring */
+  .glow-ring {
+    box-shadow: 0 0 0 1px var(--color-accent-glow),
+                0 0 20px var(--color-accent-glow);
+  }
+
+  /* Subtle card hover lift */
+  .card-hover {
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+  }
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px var(--color-accent-glow);
+  }
+}
+
+/* ─── Utility Extensions ─────────────────────────────────────────────────── */
+@layer utilities {
+  /* Background dot grid for hero sections */
+  .bg-dot-grid {
+    background-image: radial-gradient(rgba(99, 102, 241, 0.15) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  /* Noise texture overlay */
+  .noise::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+
+  /* Sidebar transition */
+  .sidebar-transition {
+    transition: width var(--transition-slow), transform var(--transition-slow);
+  }
+}
