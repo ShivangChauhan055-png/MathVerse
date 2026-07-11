@@ -26,6 +26,8 @@ import { Card } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { GlowOrb } from '@/components/ui/GlowOrb'
+import { useGamificationStore, ACHIEVEMENTS, XP_PER_LEVEL } from '@/store/useGamificationStore'
+import { soundService } from '@/services/SoundService'
 
 const stagger = {
   hidden: {},
@@ -72,19 +74,33 @@ function StatCard({ icon: Icon, label, value, sub, colour }: StatCardProps) {
   )
 }
 
-// ─── Skeleton loader bar ──────────────────────────────────────────────────────
-
-function Skeleton({ className }: { className?: string }) {
-  return (
-    <div
-      className={`bg-white/[0.05] rounded-lg animate-pulse ${className ?? ''}`}
-    />
-  )
-}
-
 // ─── Dashboard Page ───────────────────────────────────────────────────────────
 
 export function DashboardPage() {
+  const { coins, xp, level, currentStreak, longestStreak, unlockedAchievements, addCoins, addXP, recordActivity, unlockAchievement } = useGamificationStore()
+
+  const handleSimulateCorrect = () => {
+    addCoins(10)
+    addXP(15)
+    recordActivity()
+    soundService.playCorrect()
+    if (!unlockedAchievements.includes('first_question')) {
+      setTimeout(() => unlockAchievement('first_question'), 100)
+    }
+  }
+
+  const handleSimulateWrong = () => {
+    soundService.playWrong()
+  }
+
+  const handleSimulateTopicComplete = () => {
+    if (!unlockedAchievements.includes('first_topic')) {
+      unlockAchievement('first_topic')
+    }
+  }
+
+  const progressPercent = Math.min(100, Math.floor(((xp % XP_PER_LEVEL) / XP_PER_LEVEL) * 100))
+
   return (
     <div className="relative max-w-5xl mx-auto">
       <GlowOrb colour="indigo" size={500} top="-20%" right="-10%" opacity={0.15} />
@@ -116,25 +132,28 @@ export function DashboardPage() {
           </div>
         </motion.div>
 
-        {/* ── Coming Soon Banner ─────────────────────────────────────── */}
+        {/* ── Gamification Simulator ─────────────────────────────────────── */}
         <motion.div variants={fadeUp}>
           <Card variant="flat" className="border-indigo-500/30 bg-indigo-500/5">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-indigo-500/20 rounded-xl">
-                <RiFlashlightLine className="w-5 h-5 text-indigo-400" />
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-indigo-500/20 rounded-xl">
+                  <RiFlashlightLine className="w-5 h-5 text-indigo-400" />
+                </div>
+                <div>
+                  <p className="text-white font-medium text-sm">
+                    Gamification System Active
+                  </p>
+                  <p className="text-slate-400 text-xs mt-0.5">
+                    Use these buttons to simulate learning activity and trigger rewards.
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="text-white font-medium text-sm">
-                  Full dashboard coming soon
-                </p>
-                <p className="text-slate-400 text-xs mt-0.5">
-                  XP tracking, streaks, quiz history, and personalized recommendations
-                  are on the roadmap.
-                </p>
+              <div className="flex flex-wrap gap-2">
+                <Button size="sm" variant="primary" onClick={handleSimulateCorrect}>Simulate Correct</Button>
+                <Button size="sm" variant="danger" onClick={handleSimulateWrong}>Simulate Wrong</Button>
+                <Button size="sm" variant="outline" onClick={handleSimulateTopicComplete}>Complete Topic</Button>
               </div>
-              <Badge variant="indigo" className="ml-auto flex-shrink-0">
-                Planned
-              </Badge>
             </div>
           </Card>
         </motion.div>
@@ -142,10 +161,10 @@ export function DashboardPage() {
         {/* ── Stats Grid ─────────────────────────────────────────────── */}
         <motion.div variants={stagger} className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {[
-            { icon: RiBookOpenLine,  label: 'Topics Explored',  value: '—',    sub: 'Start a theorem', colour: 'indigo' },
-            { icon: RiTrophyLine,    label: 'Stages Completed', value: '—',    sub: 'Complete a stage', colour: 'cyan' },
-            { icon: RiFlashlightLine,label: 'Current Streak',   value: '—',    sub: 'Days in a row',   colour: 'violet' },
-            { icon: RiTimeLine,      label: 'Time Spent',       value: '—',    sub: 'Keep going!',     colour: 'amber' },
+            { icon: RiBookOpenLine,  label: 'Coins',  value: String(coins),    sub: 'Total earned', colour: 'indigo' },
+            { icon: RiTrophyLine,    label: 'Level', value: String(level),    sub: `${xp} Total XP`, colour: 'cyan' },
+            { icon: RiFlashlightLine,label: 'Current Streak',   value: String(currentStreak),    sub: 'Days in a row',   colour: 'violet' },
+            { icon: RiTimeLine,      label: 'Longest Streak',       value: String(longestStreak),    sub: 'Best record',     colour: 'amber' },
           ].map((s) => (
             <motion.div key={s.label} variants={fadeUp}>
               <StatCard {...s as StatCardProps} />
@@ -160,26 +179,32 @@ export function DashboardPage() {
             <Card>
               <Card.Header>
                 <div className="flex items-center justify-between">
-                  <h2 className="text-white font-semibold">Recent Activity</h2>
-                  <Badge variant="violet">Coming Soon</Badge>
+                  <h2 className="text-white font-semibold">Achievements</h2>
+                  <Badge variant="violet">{unlockedAchievements.length} / {ACHIEVEMENTS.length}</Badge>
                 </div>
               </Card.Header>
               <Card.Body>
                 <div className="space-y-3">
-                  {Array.from({ length: 4 }).map((_, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <Skeleton className="w-9 h-9 rounded-xl flex-shrink-0" />
-                      <div className="flex-1 space-y-1.5">
-                        <Skeleton className="h-3 w-3/4" />
-                        <Skeleton className="h-2.5 w-1/2" />
-                      </div>
-                      <Skeleton className="h-5 w-12 rounded-full" />
-                    </div>
-                  ))}
+                  {unlockedAchievements.length === 0 ? (
+                    <p className="text-slate-600 text-sm text-center py-4">No achievements yet. Keep learning!</p>
+                  ) : (
+                    unlockedAchievements.map((id) => {
+                      const ach = ACHIEVEMENTS.find(a => a.id === id)
+                      if (!ach) return null
+                      return (
+                        <div key={id} className="flex items-center gap-3 p-2 rounded-xl bg-white/[0.02] border border-white/[0.05]">
+                          <div className="w-10 h-10 rounded-xl bg-violet-500/20 text-violet-400 flex items-center justify-center flex-shrink-0">
+                             <RiTrophyLine className="w-5 h-5" />
+                          </div>
+                          <div>
+                            <p className="text-white text-sm font-medium">{ach.title}</p>
+                            <p className="text-slate-400 text-xs">{ach.description}</p>
+                          </div>
+                        </div>
+                      )
+                    })
+                  )}
                 </div>
-                <p className="text-slate-600 text-xs text-center mt-6">
-                  Activity will appear here as you learn theorems.
-                </p>
               </Card.Body>
             </Card>
           </motion.div>
@@ -234,17 +259,18 @@ export function DashboardPage() {
             </Card.Header>
             <Card.Body>
               <div className="space-y-4">
-                {['Number Theory', 'Combinatorics', 'Geometry', 'Algorithms'].map((cat) => (
-                  <div key={cat}>
+                  <div>
                     <div className="flex justify-between items-center mb-1.5">
-                      <span className="text-slate-400 text-xs">{cat}</span>
-                      <span className="text-slate-600 text-xs">—%</span>
+                      <span className="text-slate-400 text-sm">Level {level} Progress</span>
+                      <span className="text-slate-400 text-xs">{xp % XP_PER_LEVEL} / {XP_PER_LEVEL} XP ({progressPercent}%)</span>
                     </div>
-                    <div className="h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
-                      <div className="h-full w-0 rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 transition-all duration-1000" />
+                    <div className="h-2 rounded-full bg-white/[0.06] overflow-hidden">
+                      <div 
+                        className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-indigo-500 transition-all duration-1000 ease-out" 
+                        style={{ width: `${progressPercent}%` }}
+                      />
                     </div>
                   </div>
-                ))}
               </div>
             </Card.Body>
           </Card>

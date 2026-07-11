@@ -79,3 +79,24 @@ export interface AppState {
   /** Current colour theme (dark by default) */
   theme: 'dark' | 'light'
 }
+
+// ─── Gamification ─────────────────────────────────────────────────────────────
+
+export interface Achievement {
+  id: string
+  title: string
+  description: string
+  icon: string
+  rewardCoins: number
+  rewardXP: number
+}
+
+export interface GamificationState {
+  coins: number
+  xp: number
+  level: number
+  currentStreak: number
+  longestStreak: number
+  lastActiveDate: string | null
+  unlockedAchievements: string[]
+}

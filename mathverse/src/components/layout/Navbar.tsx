@@ -20,9 +20,12 @@ import {
   RiSunLine,
   RiMoonLine,
   RiExternalLinkLine,
+  RiCopperCoinLine,
+  RiStarLine,
 } from 'react-icons/ri'
 import { cn } from '@/utils/cn'
 import { useAppStore } from '@/store/useAppStore'
+import { useGamificationStore } from '@/store/useGamificationStore'
 import { useTheme } from '@/hooks/useTheme'
 import { APP_NAME, NAV_LINKS } from '@/constants/nav'
 
@@ -35,6 +38,7 @@ export function Navbar({ landing = false }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
   const { toggleMobileSidebar, mobileSidebarOpen } = useAppStore()
   const { isDark, toggleTheme } = useTheme()
+  const { coins, level } = useGamificationStore()
 
   // Detect scroll to add backdrop
   useEffect(() => {
@@ -128,6 +132,20 @@ export function Navbar({ landing = false }: NavbarProps) {
 
         {/* ── Right actions ────────────────────────────────────────────── */}
         <div className="flex items-center gap-2">
+          {/* Gamification Stats (app pages only) */}
+          {!landing && (
+            <div className="hidden sm:flex items-center gap-3 mr-2">
+              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400">
+                <RiCopperCoinLine className="w-4 h-4" />
+                <span className="text-sm font-bold">{coins}</span>
+              </div>
+              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400">
+                <RiStarLine className="w-4 h-4" />
+                <span className="text-sm font-bold">Lvl {level}</span>
+              </div>
+            </div>
+          )}
+
           {/* Theme toggle */}
           <button
             id="navbar-theme-toggle"

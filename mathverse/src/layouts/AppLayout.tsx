@@ -19,6 +19,7 @@ import { Outlet } from 'react-router-dom'
 import { Navbar } from '@/components/layout/Navbar'
 import { Sidebar } from '@/components/layout/Sidebar'
 import { MainLayout } from '@/components/layout/MainLayout'
+import { GamificationOverlay } from '@/components/ui/GamificationOverlay'
 
 export function AppLayout() {
   return (
@@ -28,6 +29,8 @@ export function AppLayout() {
       <MainLayout>
         <Outlet />
       </MainLayout>
+      <GamificationOverlay />
     </>
   )
 }
+
