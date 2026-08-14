@@ -21,9 +21,9 @@ interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const variantClasses: Record<CardVariant, string> = {
-  default: 'glass rounded-2xl',
-  strong:  'glass-strong rounded-2xl',
-  flat:    'bg-white/[0.04] border border-white/[0.08] rounded-2xl',
+  default: 'glass rounded-2xl relative overflow-hidden',
+  strong:  'glass-strong rounded-2xl relative overflow-hidden',
+  flat:    'bg-surface border border-[color:var(--color-border)] rounded-2xl shadow-sm relative overflow-hidden',
 }
 
 const paddingClasses = {
@@ -77,7 +77,7 @@ Card.Body = function CardBody({ className, children }: CardSectionProps) {
 
 Card.Footer = function CardFooter({ className, children }: CardSectionProps) {
   return (
-    <div className={cn('mt-4 pt-4 border-t border-white/[0.06]', className)}>
+    <div className={cn('mt-4 pt-4 border-t border-[color:var(--color-border)]', className)}>
       {children}
     </div>
   )

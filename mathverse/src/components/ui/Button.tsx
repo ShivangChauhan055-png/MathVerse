@@ -32,35 +32,35 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary: [
-    'bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700',
-    'text-white',
-    'shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40',
-    'border border-indigo-400/20',
+    'bg-accent hover:bg-teal-600 active:bg-teal-700',
+    'text-white font-display tracking-wide',
+    'shadow-sm shadow-accent-glow',
+    'border border-transparent',
   ].join(' '),
 
   secondary: [
-    'bg-cyan-500 hover:bg-cyan-400 active:bg-cyan-600',
-    'text-space-900',
-    'shadow-lg shadow-cyan-500/20',
-    'border border-cyan-400/20',
+    'bg-secondary hover:bg-amber-600 active:bg-amber-700',
+    'text-white font-display tracking-wide',
+    'shadow-sm',
+    'border border-transparent',
   ].join(' '),
 
   ghost: [
-    'bg-transparent hover:bg-white/5 active:bg-white/10',
-    'text-slate-300 hover:text-white',
+    'bg-transparent hover:bg-ink-900/5 active:bg-ink-900/10',
+    'text-ink-700 hover:text-ink-900 font-display tracking-wide',
     'border border-transparent',
   ].join(' '),
 
   outline: [
-    'bg-transparent hover:bg-indigo-500/10 active:bg-indigo-500/20',
-    'text-indigo-400 hover:text-indigo-300',
-    'border border-indigo-500/40 hover:border-indigo-400/70',
+    'bg-surface hover:bg-ink-900/5 active:bg-ink-900/10',
+    'text-ink-800 hover:text-ink-900 font-display tracking-wide',
+    'border border-[color:var(--color-border)] shadow-sm',
   ].join(' '),
 
   danger: [
     'bg-red-600 hover:bg-red-500 active:bg-red-700',
-    'text-white',
-    'shadow-lg shadow-red-500/20',
+    'text-white font-display tracking-wide',
+    'shadow-sm shadow-red-500/20',
     'border border-red-400/20',
   ].join(' '),
 }

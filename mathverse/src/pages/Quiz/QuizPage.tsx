@@ -1,17 +1,16 @@
 import { useEffect, useState } from 'react'
-import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { RiCheckLine, RiCloseLine, RiLightbulbFlashLine, RiArrowRightLine, RiTrophyLine } from 'react-icons/ri'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { useGamificationStore } from '@/store/useGamificationStore'
 import { soundService } from '@/services/SoundService'
-import type { TheoremDetail, TheoremStage } from '@/types'
+import type { TheoremDetail } from '@/types'
 import { cn } from '@/utils/cn'
 
 export function QuizPage() {
   const { id } = useParams()
-  const navigate = useNavigate()
   const { addCoins, addXP, recordActivity, unlockAchievement } = useGamificationStore()
 
   const [data, setData] = useState<TheoremDetail | null>(null)

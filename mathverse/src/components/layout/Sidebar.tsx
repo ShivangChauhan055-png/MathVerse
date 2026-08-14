@@ -54,14 +54,14 @@ function NavLinkItem({
           'group relative flex items-center gap-3',
           'h-10 rounded-xl px-3',
           'text-sm font-medium transition-all duration-150',
-          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent',
           isActive
             ? [
-                'bg-indigo-500/15 text-indigo-300',
+                'bg-accent/10 text-accent font-bold',
                 'before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2',
-                'before:h-5 before:w-1 before:rounded-r-full before:bg-indigo-400',
+                'before:h-5 before:w-1 before:rounded-r-full before:bg-accent',
               ].join(' ')
-            : 'text-slate-400 hover:text-white hover:bg-white/5',
+            : 'text-ink-700 dark:text-slate-300 hover:text-ink-900 dark:text-white hover:bg-ink-900/5 dark:bg-white/10',
         )
       }
     >
@@ -70,7 +70,7 @@ function NavLinkItem({
           <Icon
             className={cn(
               'w-5 h-5 flex-shrink-0 transition-colors',
-              isActive ? 'text-indigo-400' : 'text-slate-500 group-hover:text-white',
+              isActive ? 'text-accent' : 'text-ink-600 dark:text-slate-400 group-hover:text-ink-900 dark:text-white',
             )}
           />
           <AnimatePresence initial={false}>
@@ -93,8 +93,8 @@ function NavLinkItem({
             <span
               className={cn(
                 'absolute left-full ml-3 px-2.5 py-1.5',
-                'text-xs font-medium text-white',
-                'bg-space-700 border border-white/10 rounded-lg',
+                'text-xs font-medium text-ink-900 dark:text-white',
+                'bg-surface dark:bg-space-800 border border-[color:var(--color-border)] shadow-md rounded-lg',
                 'opacity-0 group-hover:opacity-100 pointer-events-none',
                 'transition-opacity duration-150 whitespace-nowrap z-50',
               )}
@@ -119,7 +119,7 @@ function DesktopSidebar() {
       className={cn(
         'hidden lg:flex flex-col',
         'fixed left-0 top-16 bottom-0 z-30',
-        'glass-strong border-r border-white/[0.07]',
+        'bg-surface dark:bg-space-800 border-r border-[color:var(--color-border)] coordinate-bg',
         'sidebar-transition overflow-hidden',
         collapsed ? 'w-[72px]' : 'w-[260px]',
       )}
@@ -132,7 +132,7 @@ function DesktopSidebar() {
       </nav>
 
       {/* Collapse toggle */}
-      <div className="p-3 border-t border-white/[0.06]">
+      <div className="p-3 border-t border-[color:var(--color-border)]">
         <button
           id="sidebar-collapse-toggle"
           onClick={toggleSidebar}
@@ -140,7 +140,7 @@ function DesktopSidebar() {
           className={cn(
             'w-full flex items-center justify-center gap-2',
             'h-9 rounded-xl text-sm',
-            'text-slate-500 hover:text-white hover:bg-white/10',
+            'text-ink-600 dark:text-slate-400 hover:text-ink-900 dark:text-white hover:bg-ink-900/5 dark:bg-white/10',
             'transition-colors duration-150',
           )}
         >
@@ -180,7 +180,7 @@ function MobileSidebar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden"
+            className="fixed inset-0 z-40 bg-ink-900/20 backdrop-blur-sm lg:hidden"
             onClick={() => setMobileSidebarOpen(false)}
             aria-hidden="true"
           />
@@ -194,22 +194,22 @@ function MobileSidebar() {
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
             className={cn(
               'fixed left-0 top-0 bottom-0 z-50',
-              'w-72 glass-strong border-r border-white/[0.07]',
+              'w-72 bg-surface dark:bg-space-800 coordinate-bg border-r border-[color:var(--color-border)]',
               'flex flex-col lg:hidden',
             )}
           >
             {/* Header */}
-            <div className="flex items-center justify-between h-16 px-4 border-b border-white/[0.06]">
+            <div className="flex items-center justify-between h-16 px-4 border-b border-[color:var(--color-border)]">
               <Link to="/" className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-white text-sm font-bold font-mono">
-                  Σ
+                <div className="w-8 h-8 rounded-xl bg-surface dark:bg-space-800 border border-[color:var(--color-border)] shadow-sm flex items-center justify-center text-accent text-sm font-bold font-display">
+                  ∑
                 </div>
-                <span className="text-white font-bold text-lg tracking-tight">{APP_NAME}</span>
+                <span className="text-ink-900 dark:text-white font-bold font-display text-lg tracking-tight">{APP_NAME}</span>
               </Link>
               <button
                 onClick={() => setMobileSidebarOpen(false)}
                 aria-label="Close sidebar"
-                className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+                className="p-2 rounded-xl text-ink-600 dark:text-slate-400 hover:text-ink-900 dark:text-white hover:bg-ink-900/5 dark:bg-white/10 transition-colors"
               >
                 <RiCloseLine className="w-5 h-5" />
               </button>

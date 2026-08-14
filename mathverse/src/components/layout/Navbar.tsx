@@ -54,7 +54,7 @@ export function Navbar({ landing = false }: NavbarProps) {
         'h-16 flex items-center',
         'transition-all duration-300',
         scrolled || !landing
-          ? 'glass-strong border-b border-white/[0.07] shadow-lg shadow-black/20'
+          ? 'glass-strong border-b border-[color:var(--color-border)] shadow-sm'
           : 'bg-transparent border-b border-transparent',
       )}
     >
@@ -66,8 +66,8 @@ export function Navbar({ landing = false }: NavbarProps) {
             onClick={toggleMobileSidebar}
             className={cn(
               'lg:hidden p-2 rounded-xl',
-              'text-slate-400 hover:text-white',
-              'hover:bg-white/10 transition-colors',
+              'text-ink-700 dark:text-slate-300 hover:text-ink-900 dark:text-white',
+              'hover:bg-ink-900/5 dark:bg-white/10 transition-colors',
             )}
             aria-label={mobileSidebarOpen ? 'Close menu' : 'Open menu'}
           >
@@ -91,15 +91,15 @@ export function Navbar({ landing = false }: NavbarProps) {
             transition={{ type: 'spring', stiffness: 300 }}
             className={cn(
               'w-8 h-8 rounded-xl',
-              'bg-gradient-to-br from-indigo-500 to-violet-500',
+              'bg-surface dark:bg-space-800 border border-[color:var(--color-border)]',
               'flex items-center justify-center',
-              'shadow-lg shadow-indigo-500/30',
-              'text-white text-sm font-bold font-mono',
+              'shadow-sm',
+              'text-accent text-sm font-bold font-display',
             )}
           >
-            Σ
+            ∑
           </motion.div>
-          <span className="text-white font-bold text-lg tracking-tight leading-none">
+          <span className="text-ink-900 dark:text-white font-bold font-display text-lg tracking-tight leading-none">
             {APP_NAME}
           </span>
         </Link>
@@ -119,8 +119,8 @@ export function Navbar({ landing = false }: NavbarProps) {
                   cn(
                     'px-4 py-2 rounded-xl text-sm font-medium transition-all duration-150',
                     isActive
-                      ? 'text-white bg-white/10'
-                      : 'text-slate-400 hover:text-white hover:bg-white/5',
+                      ? 'text-ink-900 dark:text-white bg-ink-900/5 dark:bg-white/10'
+                      : 'text-ink-700 dark:text-slate-300 hover:text-ink-900 dark:text-white hover:bg-ink-900/5 dark:bg-white/10',
                   )
                 }
               >
@@ -135,11 +135,11 @@ export function Navbar({ landing = false }: NavbarProps) {
           {/* Gamification Stats (app pages only) */}
           {!landing && (
             <div className="hidden sm:flex items-center gap-3 mr-2">
-              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400">
+              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-50 border border-amber-200 text-amber-600">
                 <RiCopperCoinLine className="w-4 h-4" />
                 <span className="text-sm font-bold">{coins}</span>
               </div>
-              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400">
+              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-teal-50 border border-teal-200 text-teal-600">
                 <RiStarLine className="w-4 h-4" />
                 <span className="text-sm font-bold">Lvl {level}</span>
               </div>
@@ -149,7 +149,7 @@ export function Navbar({ landing = false }: NavbarProps) {
           {/* User Avatar */}
           {!landing && avatarId && (
             <Link to="/avatar" className="hidden sm:block mr-2">
-              <img src={avatarId} alt="User Avatar" className="w-8 h-8 rounded-full border-2 border-indigo-500/50 hover:border-indigo-400 transition-colors" />
+              <img src={avatarId} alt="User Avatar" className="w-8 h-8 rounded-full border-2 border-accent hover:border-accent-glow transition-colors" />
             </Link>
           )}
 
@@ -160,7 +160,7 @@ export function Navbar({ landing = false }: NavbarProps) {
             aria-label="Toggle colour theme"
             className={cn(
               'p-2 rounded-xl transition-all duration-150',
-              'text-slate-400 hover:text-white hover:bg-white/10',
+              'text-ink-700 dark:text-slate-300 hover:text-ink-900 dark:text-white hover:bg-ink-900/5 dark:bg-white/10',
             )}
           >
             {isDark ? (
@@ -178,8 +178,8 @@ export function Navbar({ landing = false }: NavbarProps) {
               className={cn(
                 'hidden sm:inline-flex items-center gap-1.5',
                 'px-4 py-2 rounded-xl text-sm font-medium',
-                'bg-indigo-500 hover:bg-indigo-400 text-white',
-                'shadow-lg shadow-indigo-500/25 transition-all duration-150',
+                'bg-accent hover:bg-teal-600 text-white',
+                'shadow-sm shadow-accent-glow transition-all duration-150',
               )}
             >
               Explore Topics

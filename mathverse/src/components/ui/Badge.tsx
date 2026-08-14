@@ -17,21 +17,21 @@ interface BadgeProps {
 }
 
 const variantClasses: Record<BadgeVariant, string> = {
-  indigo: 'bg-indigo-500/15 text-indigo-300 border-indigo-500/30',
-  cyan:   'bg-cyan-500/15   text-cyan-300   border-cyan-500/30',
-  violet: 'bg-violet-500/15 text-violet-300 border-violet-500/30',
-  green:  'bg-emerald-500/15 text-emerald-300 border-emerald-500/30',
-  amber:  'bg-amber-500/15  text-amber-300  border-amber-500/30',
-  red:    'bg-red-500/15    text-red-300    border-red-500/30',
+  indigo: 'bg-indigo-50 text-indigo-600 border-indigo-200 font-display',
+  cyan:   'bg-cyan-50   text-cyan-600   border-cyan-200 font-display',
+  violet: 'bg-violet-50 text-violet-600 border-violet-200 font-display',
+  green:  'bg-emerald-50 text-emerald-600 border-emerald-200 font-display',
+  amber:  'bg-amber-50  text-amber-600  border-amber-200 font-display',
+  red:    'bg-red-50    text-red-600    border-red-200 font-display',
 }
 
 const dotColour: Record<BadgeVariant, string> = {
-  indigo: 'bg-indigo-400',
-  cyan:   'bg-cyan-400',
-  violet: 'bg-violet-400',
-  green:  'bg-emerald-400',
-  amber:  'bg-amber-400',
-  red:    'bg-red-400',
+  indigo: 'bg-indigo-500',
+  cyan:   'bg-cyan-500',
+  violet: 'bg-violet-500',
+  green:  'bg-emerald-500',
+  amber:  'bg-amber-500',
+  red:    'bg-red-500',
 }
 
 export function Badge({

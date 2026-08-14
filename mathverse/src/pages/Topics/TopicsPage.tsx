@@ -73,43 +73,48 @@ function TheoremCard({ theorem, index }: { theorem: TheoremMeta; index: number }
   const cat = getCategory(theorem.id)
 
   return (
-    <motion.div variants={cardReveal} className="h-full">
-      <Link to={`/theorem/${theorem.id}`} className="block h-full">
+    <motion.div variants={cardReveal} className="h-full perspective-[1000px]">
+      <Link to={`/theorem/${theorem.id}`} className="block h-full group">
       <Card
         hover
         padding="md"
-        className="h-full flex flex-col gap-4 group"
+        className="h-full flex flex-col gap-4 group relative overflow-hidden bg-surface dark:bg-space-800 border-[color:var(--color-border)] shadow-sm hover:shadow-lg transition-all duration-300 border-l-4 border-l-transparent group-hover:border-l-accent"
       >
+        {/* Background Math Shape */}
+        <div className="absolute -right-8 -bottom-8 w-32 h-32 opacity-5 pointer-events-none group-hover:scale-110 transition-transform duration-500 font-display font-bold text-9xl text-ink-900 dark:text-white">
+          ∑
+        </div>
+
         {/* Top row */}
-        <div className="flex items-start justify-between gap-2">
+        <div className="flex items-start justify-between gap-2 relative z-10">
           {/* Index + Icon */}
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-indigo-500/15 flex items-center justify-center text-indigo-400 flex-shrink-0 font-mono text-xs font-bold">
+            <div className="w-9 h-9 rounded-xl bg-ink-50 dark:bg-space-800 flex items-center justify-center text-ink-500 dark:text-slate-500 flex-shrink-0 font-display text-xs font-bold border border-[color:var(--color-border)]">
               {String(index + 1).padStart(2, '0')}
             </div>
           </div>
-          <Badge variant={cat.colour} dot>
+          <Badge variant={cat.colour} dot className="font-display">
             {cat.label}
           </Badge>
         </div>
 
         {/* Theorem name */}
-        <div className="flex-1 space-y-2">
-          <h2 className="text-white font-semibold text-sm leading-snug group-hover:text-indigo-300 transition-colors">
+        <div className="flex-1 space-y-2 relative z-10">
+          <h2 className="text-ink-900 dark:text-white font-bold font-display text-base leading-snug group-hover:text-accent transition-colors">
             {theorem.theorem}
           </h2>
-          <p className="text-slate-500 text-xs leading-relaxed line-clamp-4">
+          <p className="text-ink-600 dark:text-slate-400 text-sm leading-relaxed line-clamp-4">
             {theorem.coreIdea}
           </p>
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between pt-2 border-t border-white/[0.05]">
-          <span className="text-slate-600 text-xs flex items-center gap-1">
-            <RiBookOpenLine className="w-3.5 h-3.5" />
+        <div className="flex items-center justify-between pt-3 border-t border-[color:var(--color-border)] relative z-10 mt-auto">
+          <span className="text-ink-500 dark:text-slate-500 font-medium text-xs flex items-center gap-1">
+            <RiBookOpenLine className="w-4 h-4" />
             View Theorem
           </span>
-          <RiArrowRightLine className="w-4 h-4 text-slate-600 group-hover:text-indigo-400 transition-colors" />
+          <RiArrowRightLine className="w-4 h-4 text-ink-400 dark:text-slate-500 group-hover:text-accent transition-colors" />
         </div>
       </Card>
       </Link>
@@ -139,7 +144,7 @@ export function TopicsPage() {
 
   return (
     <div className="relative max-w-5xl mx-auto">
-      <GlowOrb colour="cyan" size={400} top="-10%" right="-10%" opacity={0.12} />
+      <GlowOrb colour="emerald" size={400} top="-10%" right="-10%" opacity={0.15} />
 
       {/* ── Page Header ────────────────────────────────────────────────── */}
       <motion.div
@@ -148,8 +153,8 @@ export function TopicsPage() {
         transition={{ duration: 0.5 }}
         className="mb-8"
       >
-        <h1 className="text-3xl font-bold text-white">Theorem Library</h1>
-        <p className="text-slate-400 text-sm mt-1">
+        <h1 className="text-3xl font-bold text-ink-900 dark:text-white font-display">Theorem Library</h1>
+        <p className="text-ink-600 dark:text-slate-400 text-sm mt-1">
           {theorems.length} curated theorems. Explore at your own pace.
         </p>
       </motion.div>
@@ -163,7 +168,7 @@ export function TopicsPage() {
       >
         {/* Search input */}
         <div className="relative">
-          <RiSearchLine className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+          <RiSearchLine className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-400 dark:text-slate-500" />
           <input
             id="topics-search"
             type="search"
@@ -171,10 +176,10 @@ export function TopicsPage() {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search theorems…"
             className={cn(
-              'w-full h-11 pl-11 pr-4',
-              'glass rounded-xl',
-              'text-sm text-white placeholder:text-slate-600',
-              'focus:outline-none focus:ring-2 focus:ring-indigo-500/50',
+              'w-full h-12 pl-12 pr-4',
+              'bg-surface dark:bg-space-800 border border-[color:var(--color-border)] rounded-xl shadow-sm',
+              'text-sm text-ink-900 dark:text-white placeholder:text-ink-400 dark:text-slate-500 font-medium',
+              'focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent',
               'transition-all duration-150',
             )}
           />
@@ -188,10 +193,10 @@ export function TopicsPage() {
               id={`filter-${cat.toLowerCase().replace(/\s+/g, '-')}`}
               onClick={() => setActiveCategory(cat)}
               className={cn(
-                'px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-150',
+                'px-4 py-1.5 rounded-full text-xs font-bold font-display transition-all duration-150 border',
                 activeCategory === cat
-                  ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/25'
-                  : 'glass text-slate-400 hover:text-white hover:bg-white/10',
+                  ? 'bg-accent text-white border-accent shadow-md shadow-accent-glow'
+                  : 'bg-surface dark:bg-space-800 border-[color:var(--color-border)] text-ink-600 dark:text-slate-400 hover:text-ink-900 dark:text-white hover:bg-ink-50 dark:bg-space-800 shadow-sm',
               )}
             >
               {cat}
@@ -205,10 +210,10 @@ export function TopicsPage() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="text-center py-20 text-slate-600"
+          className="text-center py-20 text-ink-500 dark:text-slate-500"
         >
-          <RiSearchLine className="w-12 h-12 mx-auto mb-4 opacity-40" />
-          <p className="text-lg font-medium text-slate-500">No theorems found</p>
+          <RiSearchLine className="w-12 h-12 mx-auto mb-4 opacity-30 text-ink-400 dark:text-slate-500" />
+          <p className="text-lg font-bold font-display text-ink-700 dark:text-slate-300">No theorems found</p>
           <p className="text-sm mt-1">Try adjusting your search or filter.</p>
         </motion.div>
       ) : (
@@ -217,7 +222,7 @@ export function TopicsPage() {
           variants={stagger}
           initial="hidden"
           animate="show"
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {filtered.map((theorem) => (
             <TheoremCard key={theorem.id} theorem={theorem} index={theorems.indexOf(theorem)} />
@@ -230,7 +235,7 @@ export function TopicsPage() {
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="text-slate-600 text-xs text-center mt-8"
+          className="text-ink-500 dark:text-slate-500 font-medium text-xs text-center mt-10"
         >
           Showing {filtered.length} of {theorems.length} theorems
         </motion.p>

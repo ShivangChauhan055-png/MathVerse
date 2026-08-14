@@ -24,13 +24,15 @@ export function MainLayout({ children }: MainLayoutProps) {
         // Push content right of the sidebar (desktop only)
         'lg:transition-[margin-left] lg:duration-400 lg:ease-in-out',
         sidebarOpen ? 'lg:ml-[260px]' : 'lg:ml-[72px]',
-        // Account for fixed navbar height
-        'pt-24',
+        // Account for fixed navbar height exactly
+        'pt-[64px]',
         // Full viewport height minus navbar
         'min-h-dvh',
         // Padding for content breathing room
         'px-4 md:px-6 lg:px-8',
-        'py-8',
+        'pb-8',
+        // Phase 1: Mathematical grid background
+        'math-grid-bg'
       )}
     >
       {children}

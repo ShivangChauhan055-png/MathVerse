@@ -13,7 +13,7 @@
 
 import { cn } from '@/utils/cn'
 
-type OrbColour = 'indigo' | 'cyan' | 'violet' | 'pink'
+type OrbColour = 'indigo' | 'cyan' | 'violet' | 'pink' | 'emerald' | 'amber'
 
 interface GlowOrbProps {
   colour?: OrbColour
@@ -29,10 +29,12 @@ interface GlowOrbProps {
 }
 
 const colourMap: Record<OrbColour, string> = {
-  indigo: 'from-indigo-600/40 via-indigo-500/20 to-transparent',
-  cyan:   'from-cyan-500/40   via-cyan-400/20   to-transparent',
-  violet: 'from-violet-600/40 via-violet-500/20 to-transparent',
-  pink:   'from-pink-600/40   via-pink-500/20   to-transparent',
+  indigo: 'from-indigo-300/40 via-indigo-200/20 to-transparent',
+  cyan:   'from-cyan-300/40   via-cyan-200/20   to-transparent',
+  violet: 'from-violet-300/40 via-violet-200/20 to-transparent',
+  pink:   'from-pink-300/40   via-pink-200/20   to-transparent',
+  emerald: 'from-emerald-300/40 via-emerald-200/20 to-transparent',
+  amber:  'from-amber-300/40 via-amber-200/20 to-transparent',
 }
 
 export function GlowOrb({
