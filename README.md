@@ -2,12 +2,23 @@
 
 MathVerse is an interactive math learning platform designed to make learning mathematics more engaging and easier to explore.
 
-It includes:
+## Features
+
 - Interactive theorem explanations
 - Topic-based learning
 - Quizzes with explanations
-- XP, coins and streaks
-- Achievements and avatar customization
+- Gamification with XP, coins and achievements
+- Interactive and visual learning experience
+
+## Screenshots
+
+### Home
+
+![MathVerse Home](home.png)
+
+### Topics
+
+![MathVerse Topics](topic.png)
 
 ## Tech Stack
 
@@ -20,12 +31,12 @@ It includes:
 
 ## Live Demo
 
-https://math-verse-six.vercel.app
+[Visit MathVerse](https://math-verse-six.vercel.app)
 
-## Getting Started
+## Project Structure
 
-```bash
-git clone https://github.com/ShivangChauhan055-png/MathVerse.git
-cd MathVerse/mathverse
-npm install
-npm run dev
+The main application is inside the `mathverse` folder.
+
+## Status
+
+Currently in development and continuously improving.
