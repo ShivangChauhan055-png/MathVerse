@@ -12,6 +12,7 @@
  */
 
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 import type { AppState } from '@/types'
 
 interface AppStore extends AppState {
@@ -26,42 +27,59 @@ interface AppStore extends AppState {
   toggleTheme: () => void
 }
 
-export const useAppStore = create<AppStore>((set) => ({
-  // ── Initial state ─────────────────────────────────────────────────────────
-  sidebarOpen: true,       // Desktop sidebar expanded by default
-  mobileSidebarOpen: false, // Mobile overlay closed by default
-  theme: 'dark',           // Dark mode first
+export const useAppStore = create<AppStore>()(
+  persist(
+    (set) => ({
+      // ── Initial state ─────────────────────────────────────────────────────────
+      sidebarOpen: true,       // Desktop sidebar expanded by default
+      mobileSidebarOpen: false, // Mobile overlay closed by default
+      theme: 'dark',           // Dark mode first
 
-  // ── Sidebar ───────────────────────────────────────────────────────────────
-  toggleSidebar: () =>
-    set((state) => ({ sidebarOpen: !state.sidebarOpen })),
+      // ── Sidebar ───────────────────────────────────────────────────────────────
+      toggleSidebar: () =>
+        set((state) => ({ sidebarOpen: !state.sidebarOpen })),
 
-  setSidebarOpen: (open) => set({ sidebarOpen: open }),
+      setSidebarOpen: (open) => set({ sidebarOpen: open }),
 
-  toggleMobileSidebar: () =>
-    set((state) => ({ mobileSidebarOpen: !state.mobileSidebarOpen })),
+      toggleMobileSidebar: () =>
+        set((state) => ({ mobileSidebarOpen: !state.mobileSidebarOpen })),
 
-  setMobileSidebarOpen: (open) => set({ mobileSidebarOpen: open }),
+      setMobileSidebarOpen: (open) => set({ mobileSidebarOpen: open }),
 
-  // ── Theme ─────────────────────────────────────────────────────────────────
-  setTheme: (theme) => {
-    // Sync with the `dark` class on <html> for Tailwind dark mode
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-    set({ theme })
-  },
+      // ── Theme ─────────────────────────────────────────────────────────────────
+      setTheme: (theme) => {
+        // Sync with the `dark` class on <html> for Tailwind dark mode
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark')
+        } else {
+          document.documentElement.classList.remove('dark')
+        }
+        set({ theme })
+      },
 
-  toggleTheme: () =>
-    set((state) => {
-      const next = state.theme === 'dark' ? 'light' : 'dark'
-      if (next === 'dark') {
-        document.documentElement.classList.add('dark')
-      } else {
-        document.documentElement.classList.remove('dark')
-      }
-      return { theme: next }
+      toggleTheme: () =>
+        set((state) => {
+          const next = state.theme === 'dark' ? 'light' : 'dark'
+          if (next === 'dark') {
+            document.documentElement.classList.add('dark')
+          } else {
+            document.documentElement.classList.remove('dark')
+          }
+          return { theme: next }
+        }),
     }),
-}))
+    {
+      name: 'mathverse-app-storage',
+      partialize: (state) => ({ theme: state.theme }),
+      onRehydrateStorage: () => (state) => {
+        if (state) {
+          if (state.theme === 'dark') {
+            document.documentElement.classList.add('dark')
+          } else {
+            document.documentElement.classList.remove('dark')
+          }
+        }
+      },
+    }
+  )
+)

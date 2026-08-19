@@ -30,6 +30,25 @@
     />
   </head>
   <body>
+    <script>
+      (function() {
+        try {
+          var state = localStorage.getItem('mathverse-app-storage');
+          var theme = 'dark'; // Default to dark mode
+          if (state) {
+            var parsed = JSON.parse(state);
+            if (parsed && parsed.state && parsed.state.theme) {
+              theme = parsed.state.theme;
+            }
+          }
+          if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

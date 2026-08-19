@@ -57,11 +57,11 @@ function NavLinkItem({
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent',
           isActive
             ? [
-                'bg-accent/10 text-accent font-bold',
+                'bg-accent/10 text-accent dark:text-teal-400 font-bold',
                 'before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2',
-                'before:h-5 before:w-1 before:rounded-r-full before:bg-accent',
+                'before:h-5 before:w-1 before:rounded-r-full before:bg-accent dark:before:bg-teal-400',
               ].join(' ')
-            : 'text-ink-700 dark:text-slate-300 hover:text-ink-900 dark:text-white hover:bg-ink-900/5 dark:bg-white/10',
+            : 'text-ink-800 dark:text-slate-300 hover:text-ink-950 dark:hover:text-white hover:bg-ink-900/5 dark:hover:bg-white/10',
         )
       }
     >
@@ -70,7 +70,7 @@ function NavLinkItem({
           <Icon
             className={cn(
               'w-5 h-5 flex-shrink-0 transition-colors',
-              isActive ? 'text-accent' : 'text-ink-600 dark:text-slate-400 group-hover:text-ink-900 dark:text-white',
+              isActive ? 'text-accent dark:text-teal-400' : 'text-ink-600 dark:text-slate-400 group-hover:text-ink-950 dark:group-hover:text-white',
             )}
           />
           <AnimatePresence initial={false}>

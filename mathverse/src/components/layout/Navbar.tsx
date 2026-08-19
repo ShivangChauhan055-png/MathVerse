@@ -117,10 +117,10 @@ export function Navbar({ landing = false }: NavbarProps) {
                 id={`navbar-link-${item.label.toLowerCase()}`}
                 className={({ isActive }) =>
                   cn(
-                    'px-4 py-2 rounded-xl text-sm font-medium transition-all duration-150',
+                    'px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-150',
                     isActive
-                      ? 'text-ink-900 dark:text-white bg-ink-900/5 dark:bg-white/10'
-                      : 'text-ink-700 dark:text-slate-300 hover:text-ink-900 dark:text-white hover:bg-ink-900/5 dark:bg-white/10',
+                      ? 'text-ink-950 dark:text-white bg-ink-900/10 dark:bg-white/10'
+                      : 'text-ink-800 dark:text-slate-300 hover:text-ink-950 dark:hover:text-white hover:bg-ink-900/5 dark:hover:bg-white/10',
                   )
                 }
               >
@@ -135,11 +135,11 @@ export function Navbar({ landing = false }: NavbarProps) {
           {/* Gamification Stats (app pages only) */}
           {!landing && (
             <div className="hidden sm:flex items-center gap-3 mr-2">
-              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-50 border border-amber-200 text-amber-600">
+              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 text-amber-600 dark:text-amber-400">
                 <RiCopperCoinLine className="w-4 h-4" />
                 <span className="text-sm font-bold">{coins}</span>
               </div>
-              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-teal-50 border border-teal-200 text-teal-600">
+              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-teal-50 dark:bg-teal-500/10 border border-teal-200 dark:border-teal-500/30 text-teal-600 dark:text-teal-400">
                 <RiStarLine className="w-4 h-4" />
                 <span className="text-sm font-bold">Lvl {level}</span>
               </div>

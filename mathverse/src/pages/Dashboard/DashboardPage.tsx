@@ -65,10 +65,10 @@ interface StatCardProps {
 }
 
 const colourClasses = {
-  indigo: { icon: 'bg-indigo-500/15 text-indigo-400', ring: 'shadow-indigo-500/10' },
-  cyan: { icon: 'bg-cyan-500/15   text-cyan-400', ring: 'shadow-cyan-500/10' },
-  violet: { icon: 'bg-violet-500/15 text-violet-400', ring: 'shadow-violet-500/10' },
-  amber: { icon: 'bg-amber-500/15  text-amber-400', ring: 'shadow-amber-500/10' },
+  indigo: { icon: 'bg-indigo-500/15 text-indigo-600 dark:text-indigo-400', ring: 'shadow-indigo-500/10' },
+  cyan:   { icon: 'bg-cyan-500/15   text-cyan-600   dark:text-cyan-400',   ring: 'shadow-cyan-500/10'   },
+  violet: { icon: 'bg-violet-500/15 text-violet-600 dark:text-violet-400', ring: 'shadow-violet-500/10' },
+  amber:  { icon: 'bg-amber-500/15  text-amber-600  dark:text-amber-400',  ring: 'shadow-amber-500/10'  },
 }
 
 function StatCard({ icon: Icon, label, value, sub, colour }: StatCardProps) {
@@ -77,9 +77,9 @@ function StatCard({ icon: Icon, label, value, sub, colour }: StatCardProps) {
     <Card className={`shadow-lg ${c.ring}`}>
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-slate-500 text-xs font-medium mb-1">{label}</p>
-          <p className="text-2xl font-bold text-white">{value}</p>
-          <p className="text-slate-500 text-xs mt-1">{sub}</p>
+          <p className="text-ink-600 dark:text-slate-400 text-xs font-medium mb-1">{label}</p>
+          <p className="text-2xl font-bold text-ink-900 dark:text-white">{value}</p>
+          <p className="text-ink-500 dark:text-slate-500 text-xs mt-1">{sub}</p>
         </div>
         <div className={`p-2.5 rounded-xl ${c.icon}`}>
           <Icon className="w-5 h-5" />
@@ -153,7 +153,7 @@ export function DashboardPage() {
                   <div className={`relative w-20 h-20 rounded-2xl flex-shrink-0 flex items-center justify-center p-2 ${bgClass} ${ringClass} transition-all duration-300`}>
                     <img src={avatarId} alt="Avatar" className="w-full h-full object-contain drop-shadow-lg" />
                     {BadgeIcon && (
-                      <div className="absolute -bottom-3 -right-3 w-8 h-8 rounded-full bg-slate-800 border-2 border-slate-700 flex items-center justify-center text-amber-400 shadow-lg">
+                      <div className="absolute -bottom-3 -right-3 w-8 h-8 rounded-full bg-ink-900 dark:bg-space-800 border-2 border-ink-700 dark:border-space-700 flex items-center justify-center text-amber-400 shadow-lg">
                         <BadgeIcon className="w-4 h-4" />
                       </div>
                     )}
@@ -161,8 +161,8 @@ export function DashboardPage() {
                 )
               })()}
               <div>
-                <h1 className="text-3xl font-bold text-white">Dashboard</h1>
-                <p className="text-slate-400 text-sm mt-1">
+                <h1 className="text-3xl font-bold text-ink-900 dark:text-white">Dashboard</h1>
+                <p className="text-ink-600 dark:text-slate-400 text-sm mt-1">
                   Your mathematics learning journey at a glance.
                 </p>
               </div>
@@ -192,17 +192,17 @@ export function DashboardPage() {
 
         {/* ── Gamification Simulator ─────────────────────────────────────── */}
         <motion.div variants={fadeUp}>
-          <Card variant="flat" className="border-indigo-500/30 bg-indigo-500/5">
+          <Card variant="flat" className="border-indigo-400/30 dark:border-indigo-500/30 bg-indigo-50 dark:bg-indigo-500/5">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-indigo-500/20 rounded-xl">
-                  <RiFlashlightLine className="w-5 h-5 text-indigo-400" />
+                <div className="p-2 bg-indigo-100 dark:bg-indigo-500/20 rounded-xl">
+                  <RiFlashlightLine className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
                 </div>
                 <div>
-                  <p className="text-white font-medium text-sm">
+                  <p className="text-ink-900 dark:text-white font-medium text-sm">
                     Gamification System Active
                   </p>
-                  <p className="text-slate-400 text-xs mt-0.5">
+                  <p className="text-ink-600 dark:text-slate-400 text-xs mt-0.5">
                     Use these buttons to simulate learning activity and trigger rewards.
                   </p>
                 </div>
@@ -218,33 +218,33 @@ export function DashboardPage() {
 
         {/* ── Audio Settings ─────────────────────────────────────────────── */}
         <motion.div variants={fadeUp}>
-          <Card variant="flat" className="border-indigo-500/30 bg-indigo-500/5">
+          <Card variant="flat" className="border-indigo-400/30 dark:border-indigo-500/30 bg-indigo-50 dark:bg-indigo-500/5">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-indigo-500/20 rounded-xl">
-                  <RiFlashlightLine className="w-5 h-5 text-indigo-400" />
+                <div className="p-2 bg-indigo-100 dark:bg-indigo-500/20 rounded-xl">
+                  <RiFlashlightLine className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
                 </div>
                 <div>
-                  <p className="text-white font-medium text-sm">
+                  <p className="text-ink-900 dark:text-white font-medium text-sm">
                     Audio Settings
                   </p>
-                  <p className="text-slate-400 text-xs mt-0.5">
+                  <p className="text-ink-600 dark:text-slate-400 text-xs mt-0.5">
                     Toggle music and sound effects.
                   </p>
                 </div>
               </div>
               <div className="flex flex-wrap items-center gap-4">
-                <label className="flex items-center gap-2 text-sm text-slate-300">
-                  <input type="checkbox" checked={musicOn} onChange={(e) => { setMusicOn(e.target.checked); soundService.playClick(); }} className="accent-indigo-500" />
+                <label className="flex items-center gap-2 text-sm text-ink-900 dark:text-slate-300 font-medium cursor-pointer">
+                  <input type="checkbox" checked={musicOn} onChange={(e) => { setMusicOn(e.target.checked); soundService.playClick(); }} className="w-4 h-4 rounded accent-accent cursor-pointer" />
                   Music
                 </label>
-                <label className="flex items-center gap-2 text-sm text-slate-300">
-                  <input type="checkbox" checked={sfxOn} onChange={(e) => { setSfxOn(e.target.checked); soundService.playClick(); }} className="accent-indigo-500" />
+                <label className="flex items-center gap-2 text-sm text-ink-900 dark:text-slate-300 font-medium cursor-pointer">
+                  <input type="checkbox" checked={sfxOn} onChange={(e) => { setSfxOn(e.target.checked); soundService.playClick(); }} className="w-4 h-4 rounded accent-accent cursor-pointer" />
                   SFX
                 </label>
-                <label className="flex items-center gap-2 text-sm text-slate-300">
+                <label className="flex items-center gap-2 text-sm text-ink-900 dark:text-slate-300 font-medium">
                   Volume:
-                  <input type="range" min="0" max="1" step="0.05" value={volume} onChange={(e) => setVolume(parseFloat(e.target.value))} className="w-20 accent-indigo-500" />
+                  <input type="range" min="0" max="1" step="0.05" value={volume} onChange={(e) => setVolume(parseFloat(e.target.value))} className="w-20 accent-accent cursor-pointer" />
                 </label>
               </div>
             </div>
@@ -272,26 +272,26 @@ export function DashboardPage() {
             <Card>
               <Card.Header>
                 <div className="flex items-center justify-between">
-                  <h2 className="text-white font-semibold">Achievements</h2>
+                  <h2 className="text-ink-900 dark:text-white font-semibold">Achievements</h2>
                   <Badge variant="violet">{unlockedAchievements.length} / {ACHIEVEMENTS.length}</Badge>
                 </div>
               </Card.Header>
               <Card.Body>
                 <div className="space-y-3">
                   {unlockedAchievements.length === 0 ? (
-                    <p className="text-slate-600 text-sm text-center py-4">No achievements yet. Keep learning!</p>
+                    <p className="text-ink-500 dark:text-slate-500 text-sm text-center py-4">No achievements yet. Keep learning!</p>
                   ) : (
                     unlockedAchievements.map((id) => {
                       const ach = ACHIEVEMENTS.find(a => a.id === id)
                       if (!ach) return null
                       return (
-                        <div key={id} className="flex items-center gap-3 p-2 rounded-xl bg-white/[0.02] border border-white/[0.05]">
-                          <div className="w-10 h-10 rounded-xl bg-violet-500/20 text-violet-400 flex items-center justify-center flex-shrink-0">
+                        <div key={id} className="flex items-center gap-3 p-2 rounded-xl bg-ink-900/[0.03] dark:bg-white/[0.04] border border-[color:var(--color-border)]">
+                          <div className="w-10 h-10 rounded-xl bg-violet-100 dark:bg-violet-500/20 text-violet-600 dark:text-violet-400 flex items-center justify-center flex-shrink-0">
                             <RiTrophyLine className="w-5 h-5" />
                           </div>
                           <div>
-                            <p className="text-white text-sm font-medium">{ach.title}</p>
-                            <p className="text-slate-400 text-xs">{ach.description}</p>
+                            <p className="text-ink-900 dark:text-white text-sm font-medium">{ach.title}</p>
+                            <p className="text-ink-600 dark:text-slate-400 text-xs">{ach.description}</p>
                           </div>
                         </div>
                       )
@@ -306,8 +306,8 @@ export function DashboardPage() {
           <motion.div variants={fadeUp}>
             <Card className="h-full flex flex-col">
               <Card.Header>
-                <h2 className="text-white font-semibold">Quick Start</h2>
-                <p className="text-slate-500 text-xs mt-1">Jump into a theorem</p>
+                <h2 className="text-ink-900 dark:text-white font-semibold">Quick Start</h2>
+                <p className="text-ink-500 dark:text-slate-500 text-xs mt-1">Jump into a theorem</p>
               </Card.Header>
               <Card.Body className="flex-1">
                 <div className="space-y-2.5">
@@ -316,15 +316,15 @@ export function DashboardPage() {
                       <Link
                         key={name}
                         to="/topics"
-                        className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group"
+                        className="flex items-center gap-3 p-3 rounded-xl hover:bg-ink-900/5 dark:hover:bg-white/5 transition-colors group"
                       >
-                        <div className="w-7 h-7 rounded-lg bg-indigo-500/15 flex items-center justify-center text-indigo-400 flex-shrink-0 text-xs font-bold font-mono">
+                        <div className="w-7 h-7 rounded-lg bg-indigo-100 dark:bg-indigo-500/15 flex items-center justify-center text-indigo-600 dark:text-indigo-400 flex-shrink-0 text-xs font-bold font-mono">
                           Σ
                         </div>
-                        <span className="text-slate-300 text-xs group-hover:text-white transition-colors line-clamp-1">
+                        <span className="text-ink-700 dark:text-slate-300 text-xs group-hover:text-ink-900 dark:group-hover:text-white transition-colors line-clamp-1">
                           {name}
                         </span>
-                        <RiArrowRightLine className="w-3.5 h-3.5 text-slate-600 group-hover:text-indigo-400 ml-auto flex-shrink-0 transition-colors" />
+                        <RiArrowRightLine className="w-3.5 h-3.5 text-ink-400 dark:text-slate-600 group-hover:text-indigo-500 ml-auto flex-shrink-0 transition-colors" />
                       </Link>
                     ),
                   )}
@@ -346,7 +346,7 @@ export function DashboardPage() {
           <Card>
             <Card.Header>
               <div className="flex items-center justify-between">
-                <h2 className="text-white font-semibold">Learning Progress</h2>
+                <h2 className="text-ink-900 dark:text-white font-semibold">Learning Progress</h2>
                 <Badge variant="cyan">Coming Soon</Badge>
               </div>
             </Card.Header>
@@ -354,10 +354,10 @@ export function DashboardPage() {
               <div className="space-y-4">
                 <div>
                   <div className="flex justify-between items-center mb-1.5">
-                    <span className="text-slate-400 text-sm">Level {level} Progress</span>
-                    <span className="text-slate-400 text-xs">{xp % XP_PER_LEVEL} / {XP_PER_LEVEL} XP ({progressPercent}%)</span>
+                    <span className="text-ink-600 dark:text-slate-400 text-sm">Level {level} Progress</span>
+                    <span className="text-ink-500 dark:text-slate-400 text-xs">{xp % XP_PER_LEVEL} / {XP_PER_LEVEL} XP ({progressPercent}%)</span>
                   </div>
-                  <div className="h-2 rounded-full bg-white/[0.06] overflow-hidden">
+                  <div className="h-2 rounded-full bg-ink-900/[0.07] dark:bg-white/[0.07] overflow-hidden">
                     <div
                       className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-indigo-500 transition-all duration-1000 ease-out"
                       style={{ width: `${progressPercent}%` }}

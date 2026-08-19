@@ -46,15 +46,15 @@ const variantClasses: Record<ButtonVariant, string> = {
   ].join(' '),
 
   ghost: [
-    'bg-transparent hover:bg-ink-900/5 active:bg-ink-900/10',
-    'text-ink-700 hover:text-ink-900 font-display tracking-wide',
+    'bg-transparent hover:bg-ink-900/10 dark:hover:bg-white/10 active:bg-ink-900/15 dark:active:bg-white/15',
+    'text-ink-900 dark:text-slate-200 hover:text-ink-950 dark:hover:text-white font-display font-semibold tracking-wide',
     'border border-transparent',
   ].join(' '),
 
   outline: [
-    'bg-surface hover:bg-ink-900/5 active:bg-ink-900/10',
-    'text-ink-800 hover:text-ink-900 font-display tracking-wide',
-    'border border-[color:var(--color-border)] shadow-sm',
+    'bg-surface dark:bg-space-800 hover:bg-ink-900/5 dark:hover:bg-white/5 active:bg-ink-900/10',
+    'text-ink-900 dark:text-slate-200 hover:text-ink-950 dark:hover:text-white font-display font-semibold tracking-wide',
+    'border border-[color:var(--color-border-strong)] dark:border-[color:var(--color-border)] shadow-sm',
   ].join(' '),
 
   danger: [

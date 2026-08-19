@@ -21,15 +21,24 @@
   --space-8: 2rem;
   --space-16: 4rem;
 
-  /* Brand colours */
-  --color-bg: #fcfaf4;
-  --color-surface: #ffffff;
-  --color-border: rgba(20, 32, 47, 0.08);
-  --color-accent: #2e988e;
-  --color-accent-glow: rgba(46, 152, 142, 0.2);
-  --color-secondary: #c88b2f;
-  --color-text-primary: #14202f;
-  --color-text-muted: #556372;
+  /* Brand colours — LIGHT MODE */
+  --color-bg:             #f7f5f0;
+  --color-surface:        #ffffff;
+  --color-surface-alt:    #f0ede4;
+  --color-border:         rgba(15, 23, 42, 0.14);
+  --color-border-strong:  rgba(15, 23, 42, 0.28);
+  --color-accent:         #1f7a72;
+  --color-accent-glow:    rgba(31, 122, 114, 0.25);
+  --color-secondary:      #b8741a;
+  --color-text-primary:   #0f172a;
+  --color-text-muted:     #334155;
+  --color-text-subtle:    #64748b;
+
+  /* Semantic surface tokens */
+  --color-card-bg:        #ffffff;
+  --color-card-hover-bg:  #faf9f6;
+  --color-input-bg:       #ffffff;
+  --color-input-border:   rgba(15, 23, 42, 0.24);
 
   /* Sidebar width */
   --sidebar-width: 260px;
@@ -43,12 +52,24 @@
 }
 
 .dark {
-  --color-bg: #0f1422;
-  --color-surface: #182231;
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-text-primary: #ffffff;
-  --color-text-muted: #94a3b8;
-  --color-accent-glow: rgba(46, 152, 142, 0.3);
+  /* DARK MODE — deep charcoal/navy, not pure black */
+  --color-bg:             #111827;
+  --color-surface:        #1a2535;
+  --color-surface-alt:    #1f2d40;
+  --color-border:         rgba(255, 255, 255, 0.09);
+  --color-border-strong:  rgba(255, 255, 255, 0.18);
+  --color-accent:         #38a89d;
+  --color-accent-glow:    rgba(56, 168, 157, 0.3);
+  --color-secondary:      #d4a043;
+  --color-text-primary:   #f1f5f9;
+  --color-text-muted:     #94a3b8;
+  --color-text-subtle:    #64748b;
+
+  /* Semantic surface tokens */
+  --color-card-bg:        #1a2535;
+  --color-card-hover-bg:  #1f2d40;
+  --color-input-bg:       #1f2d40;
+  --color-input-border:   rgba(255, 255, 255, 0.12);
 }
 
 /* ─── Base Resets ────────────────────────────────────────────────────────── */
@@ -66,11 +87,11 @@
   }
 
   body {
-    @apply bg-paper-50 dark:bg-space-900 text-ink-900 dark:text-white font-sans;
     background-color: var(--color-bg);
     color: var(--color-text-primary);
     min-height: 100dvh;
     overflow-x: hidden;
+    font-family: Inter, system-ui, sans-serif;
   }
 
   /* Scrollbar styling */
@@ -99,31 +120,25 @@
   /* Selection colour */
   ::selection {
     background: rgba(46, 152, 142, 0.2);
-    color: #14202f;
+    color: var(--color-text-primary);
   }
 }
 
 /* ─── Component Utilities ────────────────────────────────────────────────── */
 @layer components {
-  /* Glass card */
+  /* Glass card — uses solid surface bg; avoids broken rgba(var()) pattern */
   .glass {
-    background: rgba(var(--color-surface), 0.7);
+    background-color: var(--color-card-bg);
     backdrop-filter: blur(12px) saturate(140%);
     -webkit-backdrop-filter: blur(12px) saturate(140%);
     border: 1px solid var(--color-border);
   }
-  .dark .glass {
-    background: rgba(24, 34, 49, 0.7);
-  }
 
   .glass-strong {
-    background: rgba(var(--color-surface), 0.95);
+    background-color: var(--color-card-bg);
     backdrop-filter: blur(16px) saturate(160%);
     -webkit-backdrop-filter: blur(16px) saturate(160%);
     border: 1px solid var(--color-border);
-  }
-  .dark .glass-strong {
-    background: rgba(24, 34, 49, 0.95);
   }
 
   /* Gradient text */
@@ -153,12 +168,30 @@
   }
   .card-hover:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 24px rgba(20, 32, 47, 0.08), 0 0 0 1px var(--color-accent-glow);
-    border-color: rgba(46, 152, 142, 0.3);
+    box-shadow: 0 12px 24px rgba(20, 32, 47, 0.1), 0 0 0 1px var(--color-accent-glow);
+    border-color: rgba(46, 152, 142, 0.35);
   }
-  
+
   .equation-text {
-    @apply font-mono text-ink-800 tracking-tight;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    color: var(--color-text-primary);
+    letter-spacing: -0.02em;
+  }
+
+  /* ── Input base — themed for both modes ── */
+  .input-base {
+    background-color: var(--color-input-bg);
+    border: 2px solid var(--color-input-border);
+    color: var(--color-text-primary);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+  .input-base::placeholder {
+    color: var(--color-text-subtle);
+  }
+  .input-base:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--color-accent-glow);
   }
 }
 
@@ -178,8 +211,8 @@
   
   .coordinate-bg {
     background-image: 
-      linear-gradient(rgba(46, 152, 142, 0.08) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(46, 152, 142, 0.08) 1px, transparent 1px);
+      linear-gradient(rgba(46, 152, 142, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(46, 152, 142, 0.06) 1px, transparent 1px);
     background-size: 40px 40px;
     background-position: center;
   }

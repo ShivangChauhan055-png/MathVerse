@@ -204,13 +204,13 @@ export function LandingPage() {
             <br />
             <span className="gradient-text">Explore Math.</span>
             <br />
-            <span className="text-ink-600 dark:text-slate-400">Like Never Before.</span>
+            <span className="text-ink-800 dark:text-slate-400">Like Never Before.</span>
           </motion.h1>
 
           {/* Tagline */}
           <motion.p
             variants={fadeUp}
-            className="text-lg sm:text-xl text-ink-700 dark:text-slate-300 max-w-2xl leading-relaxed"
+            className="text-lg sm:text-xl text-ink-800 dark:text-slate-300 max-w-2xl leading-relaxed"
           >
             {APP_TAGLINE} Dive into story-driven lessons on real theorems — from
             Euclid's algorithm to Fermat's Last Theorem — one elegant step at a time.
@@ -288,7 +288,7 @@ export function LandingPage() {
               Learning reimagined for{' '}
               <span className="gradient-text">mathematicians</span>
             </motion.h2>
-            <motion.p variants={fadeUp} className="text-ink-700 dark:text-slate-300 text-lg max-w-2xl mx-auto">
+            <motion.p variants={fadeUp} className="text-ink-800 dark:text-slate-300 text-lg max-w-2xl mx-auto">
               Not just another textbook online. MathVerse is an experience built for
               deep understanding and lasting insight.
             </motion.p>
@@ -310,7 +310,7 @@ export function LandingPage() {
                     className={`
                       inline-flex items-center justify-center
                       w-12 h-12 rounded-2xl mb-5 shadow-inner
-                      bg-${f.colour}-50 border border-${f.colour}-200 text-${f.colour}-600
+                      bg-${f.colour}-50 border border-${f.colour}-300 dark:border-${f.colour}-200 text-${f.colour}-800 dark:text-${f.colour}-400
                       group-hover:bg-${f.colour}-100
                       transition-colors duration-200
                     `}
@@ -349,7 +349,7 @@ export function LandingPage() {
             <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-bold text-ink-900 dark:text-white mb-4 font-display">
               Explore the <span className="gradient-text">Theorems</span>
             </motion.h2>
-            <motion.p variants={fadeUp} className="text-ink-700 dark:text-slate-300 text-lg max-w-xl mx-auto">
+            <motion.p variants={fadeUp} className="text-ink-800 dark:text-slate-300 text-lg max-w-xl mx-auto">
               A curated collection of the most beautiful and important results in mathematics.
             </motion.p>
           </motion.div>
@@ -370,14 +370,14 @@ export function LandingPage() {
                       <Badge variant={badgeColourMap[t.id] ?? 'indigo'} className="font-display">
                         #{String(i + 1).padStart(2, '0')}
                       </Badge>
-                      <RiArrowRightLine className="w-5 h-5 text-ink-400 group-hover:text-accent transition-colors" />
+                      <RiArrowRightLine className="w-5 h-5 text-ink-500 dark:text-ink-400 group-hover:text-accent transition-colors" />
                     </div>
                     {/* Theorem name */}
                     <h3 className="text-ink-900 dark:text-white font-bold font-display text-lg leading-tight">
                       {t.theorem}
                     </h3>
                     {/* Core idea */}
-                    <p className="text-ink-600 dark:text-slate-400 text-sm leading-relaxed line-clamp-3 flex-1">
+                    <p className="text-ink-700 dark:text-slate-400 text-sm leading-relaxed line-clamp-3 flex-1">
                       {t.coreIdea}
                     </p>
                   </Card>

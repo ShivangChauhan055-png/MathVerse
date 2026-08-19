@@ -89,7 +89,7 @@ function TheoremCard({ theorem, index }: { theorem: TheoremMeta; index: number }
         <div className="flex items-start justify-between gap-2 relative z-10">
           {/* Index + Icon */}
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-ink-50 dark:bg-space-800 flex items-center justify-center text-ink-500 dark:text-slate-500 flex-shrink-0 font-display text-xs font-bold border border-[color:var(--color-border)]">
+            <div className="w-9 h-9 rounded-xl bg-ink-100 dark:bg-space-800 flex items-center justify-center text-ink-700 dark:text-slate-500 flex-shrink-0 font-display text-xs font-bold border border-[color:var(--color-border)]">
               {String(index + 1).padStart(2, '0')}
             </div>
           </div>
@@ -103,18 +103,18 @@ function TheoremCard({ theorem, index }: { theorem: TheoremMeta; index: number }
           <h2 className="text-ink-900 dark:text-white font-bold font-display text-base leading-snug group-hover:text-accent transition-colors">
             {theorem.theorem}
           </h2>
-          <p className="text-ink-600 dark:text-slate-400 text-sm leading-relaxed line-clamp-4">
+          <p className="text-ink-700 dark:text-slate-400 text-sm leading-relaxed line-clamp-4">
             {theorem.coreIdea}
           </p>
         </div>
 
         {/* Footer */}
         <div className="flex items-center justify-between pt-3 border-t border-[color:var(--color-border)] relative z-10 mt-auto">
-          <span className="text-ink-500 dark:text-slate-500 font-medium text-xs flex items-center gap-1">
+          <span className="text-ink-600 dark:text-slate-500 font-semibold text-xs flex items-center gap-1">
             <RiBookOpenLine className="w-4 h-4" />
             View Theorem
           </span>
-          <RiArrowRightLine className="w-4 h-4 text-ink-400 dark:text-slate-500 group-hover:text-accent transition-colors" />
+          <RiArrowRightLine className="w-4 h-4 text-ink-500 dark:text-slate-500 group-hover:text-accent transition-colors" />
         </div>
       </Card>
       </Link>
@@ -168,7 +168,7 @@ export function TopicsPage() {
       >
         {/* Search input */}
         <div className="relative">
-          <RiSearchLine className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-400 dark:text-slate-500" />
+          <RiSearchLine className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-500 dark:text-slate-500" />
           <input
             id="topics-search"
             type="search"
@@ -177,8 +177,8 @@ export function TopicsPage() {
             placeholder="Search theorems…"
             className={cn(
               'w-full h-12 pl-12 pr-4',
-              'bg-surface dark:bg-space-800 border border-[color:var(--color-border)] rounded-xl shadow-sm',
-              'text-sm text-ink-900 dark:text-white placeholder:text-ink-400 dark:text-slate-500 font-medium',
+              'bg-surface dark:bg-space-800 border border-[color:var(--color-border-strong)] dark:border-[color:var(--color-border)] rounded-xl shadow-sm',
+              'text-sm text-ink-900 dark:text-white placeholder:text-ink-500 dark:placeholder:text-slate-500 font-medium',
               'focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent',
               'transition-all duration-150',
             )}
@@ -196,7 +196,7 @@ export function TopicsPage() {
                 'px-4 py-1.5 rounded-full text-xs font-bold font-display transition-all duration-150 border',
                 activeCategory === cat
                   ? 'bg-accent text-white border-accent shadow-md shadow-accent-glow'
-                  : 'bg-surface dark:bg-space-800 border-[color:var(--color-border)] text-ink-600 dark:text-slate-400 hover:text-ink-900 dark:text-white hover:bg-ink-50 dark:bg-space-800 shadow-sm',
+                  : 'bg-surface dark:bg-space-800 border-[color:var(--color-border-strong)] dark:border-[color:var(--color-border)] text-ink-800 dark:text-slate-400 hover:text-ink-950 dark:hover:text-white hover:bg-ink-100 dark:hover:bg-space-700 shadow-sm',
               )}
             >
               {cat}

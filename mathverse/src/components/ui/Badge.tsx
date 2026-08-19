@@ -17,12 +17,12 @@ interface BadgeProps {
 }
 
 const variantClasses: Record<BadgeVariant, string> = {
-  indigo: 'bg-indigo-50 text-indigo-600 border-indigo-200 font-display',
-  cyan:   'bg-cyan-50   text-cyan-600   border-cyan-200 font-display',
-  violet: 'bg-violet-50 text-violet-600 border-violet-200 font-display',
-  green:  'bg-emerald-50 text-emerald-600 border-emerald-200 font-display',
-  amber:  'bg-amber-50  text-amber-600  border-amber-200 font-display',
-  red:    'bg-red-50    text-red-600    border-red-200 font-display',
+  indigo: 'bg-indigo-50 dark:bg-indigo-500/15 text-indigo-800 dark:text-indigo-300 border-indigo-300 dark:border-indigo-500/30 font-display font-semibold',
+  cyan:   'bg-cyan-50   dark:bg-cyan-500/15   text-cyan-800   dark:text-cyan-300   border-cyan-300   dark:border-cyan-500/30   font-display font-semibold',
+  violet: 'bg-violet-50 dark:bg-violet-500/15 text-violet-800 dark:text-violet-300 border-violet-300 dark:border-violet-500/30 font-display font-semibold',
+  green:  'bg-emerald-50 dark:bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 border-emerald-300 dark:border-emerald-500/30 font-display font-semibold',
+  amber:  'bg-amber-50  dark:bg-amber-500/15  text-amber-900  dark:text-amber-300  border-amber-300  dark:border-amber-500/30  font-display font-semibold',
+  red:    'bg-red-50    dark:bg-red-500/15    text-red-800    dark:text-red-300    border-red-300    dark:border-red-500/30    font-display font-semibold',
 }
 
 const dotColour: Record<BadgeVariant, string> = {

@@ -39,11 +39,11 @@ export function QuizPage() {
   }, [id])
 
   if (loading) {
-    return <div className="text-center py-20 text-slate-500">Loading Quiz...</div>
+    return <div className="text-center py-20 text-ink-700 dark:text-slate-400 font-medium">Loading Quiz...</div>
   }
 
   if (!data || data.stages.length === 0) {
-    return <div className="text-center py-20 text-slate-500">Quiz not found or empty</div>
+    return <div className="text-center py-20 text-ink-700 dark:text-slate-400 font-medium">Quiz not found or empty</div>
   }
 
   const currentStage = data.stages[stageIndex]
@@ -87,12 +87,12 @@ export function QuizPage() {
     return (
       <div className="relative max-w-2xl mx-auto py-20 text-center">
         <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="space-y-8">
-          <div className="w-24 h-24 mx-auto rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center border-4 border-indigo-500/30">
+          <div className="w-24 h-24 mx-auto rounded-full bg-indigo-100 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center border-4 border-indigo-300 dark:border-indigo-500/30">
             <RiTrophyLine className="w-12 h-12" />
           </div>
           <div>
-            <h1 className="text-4xl font-bold text-white mb-2">Quiz Completed!</h1>
-            <p className="text-slate-400 text-lg">You mastered <strong className="text-indigo-300">{data.displayName}</strong>.</p>
+            <h1 className="text-4xl font-bold text-ink-900 dark:text-white mb-2">Quiz Completed!</h1>
+            <p className="text-ink-600 dark:text-slate-400 text-lg">You mastered <strong className="text-indigo-600 dark:text-indigo-300">{data.displayName}</strong>.</p>
           </div>
           <div className="flex justify-center gap-4">
             <Link to="/topics">
@@ -113,10 +113,10 @@ export function QuizPage() {
     <div className="relative max-w-3xl mx-auto pb-12">
       <div className="mb-8">
         <div className="flex justify-between items-end mb-2">
-          <h2 className="text-slate-400 text-sm font-medium">Stage {stageIndex + 1} of {data.stages.length}</h2>
-          <span className="text-indigo-400 text-xs font-bold">{Math.round(progressPercent)}%</span>
+          <h2 className="text-ink-600 dark:text-slate-400 text-sm font-medium">Stage {stageIndex + 1} of {data.stages.length}</h2>
+          <span className="text-indigo-600 dark:text-indigo-400 text-xs font-bold">{Math.round(progressPercent)}%</span>
         </div>
-        <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+        <div className="h-2 w-full bg-ink-900/[0.07] dark:bg-white/5 rounded-full overflow-hidden">
           <motion.div 
             className="h-full bg-indigo-500" 
             initial={{ width: `${progressPercent}%` }}
@@ -133,15 +133,15 @@ export function QuizPage() {
           exit={{ opacity: 0, x: -20 }}
           transition={{ duration: 0.3 }}
         >
-          <Card className="p-6 md:p-8 border-indigo-500/20 bg-indigo-500/5">
+          <Card className="p-6 md:p-8 border-indigo-400/20 dark:border-indigo-500/20 bg-indigo-50/60 dark:bg-indigo-500/5">
             <div className="mb-6">
-              <span className="inline-block px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-bold tracking-wider uppercase mb-4">
+              <span className="inline-block px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 text-xs font-bold tracking-wider uppercase mb-4">
                 {currentStage.conceptLabel}
               </span>
-              <p className="text-lg text-slate-200 leading-relaxed font-serif bg-white/5 p-4 rounded-xl border border-white/10 mb-6">
+              <p className="text-lg text-ink-800 dark:text-slate-200 leading-relaxed font-serif bg-ink-900/[0.04] dark:bg-white/5 p-4 rounded-xl border border-[color:var(--color-border)] mb-6">
                 {currentStage.conceptShown}
               </p>
-              <h1 className="text-2xl font-bold text-white">{currentStage.question}</h1>
+              <h1 className="text-2xl font-bold text-ink-900 dark:text-white">{currentStage.question}</h1>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -156,10 +156,10 @@ export function QuizPage() {
                   disabled={status === 'correct'}
                   placeholder="Type your answer here..."
                   className={cn(
-                    "w-full bg-white/5 border-2 rounded-xl px-4 py-4 text-white text-lg transition-colors outline-none",
-                    status === 'idle' ? "border-white/10 focus:border-indigo-500/50" : "",
-                    status === 'correct' ? "border-green-500/50 bg-green-500/10" : "",
-                    status === 'wrong' ? "border-red-500/50 bg-red-500/10" : ""
+                    "w-full input-base rounded-xl px-4 py-4 text-lg transition-colors",
+                    status === 'idle' ? "" : "",
+                    status === 'correct' ? "!border-green-500/50 bg-green-50 dark:bg-green-500/10" : "",
+                    status === 'wrong' ? "!border-red-500/50 bg-red-50 dark:bg-red-500/10" : ""
                   )}
                   autoFocus
                 />
@@ -177,7 +177,7 @@ export function QuizPage() {
                   variant="ghost" 
                   size="sm" 
                   onClick={() => setShowHint(!showHint)}
-                  className="text-amber-400 hover:text-amber-300 hover:bg-amber-400/10"
+                  className="text-amber-700 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-300 hover:bg-amber-100 dark:hover:bg-amber-400/10 font-semibold"
                 >
                   <RiLightbulbFlashLine className="w-4 h-4 mr-1" />
                   {showHint ? 'Hide Hint' : 'Show Hint'}
@@ -203,7 +203,7 @@ export function QuizPage() {
                   exit={{ opacity: 0, height: 0 }}
                   className="mt-6 overflow-hidden"
                 >
-                  <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-200 text-sm leading-relaxed">
+                  <div className="p-4 rounded-xl bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 text-amber-700 dark:text-amber-200 text-sm leading-relaxed">
                     <strong>Hint:</strong> {currentStage.hint}
                   </div>
                 </motion.div>

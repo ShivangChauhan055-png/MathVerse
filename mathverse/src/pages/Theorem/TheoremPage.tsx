@@ -29,11 +29,11 @@ export function TheoremPage() {
   }, [id])
 
   if (loading) {
-    return <div className="text-center py-20 text-slate-500">Loading...</div>
+    return <div className="text-center py-20 text-ink-600 dark:text-slate-400 font-medium">Loading...</div>
   }
 
   if (!data) {
-    return <div className="text-center py-20 text-slate-500">Theorem not found</div>
+    return <div className="text-center py-20 text-ink-600 dark:text-slate-400 font-medium">Theorem not found</div>
   }
 
   return (
@@ -46,37 +46,37 @@ export function TheoremPage() {
         className="space-y-8"
       >
         <div>
-          <Link to="/topics" className="inline-flex items-center gap-1 text-sm text-slate-400 hover:text-white transition-colors mb-6">
+          <Link to="/topics" className="inline-flex items-center gap-1 text-sm text-ink-600 dark:text-slate-400 hover:text-ink-900 dark:hover:text-white transition-colors mb-6">
             <RiArrowLeftLine className="w-4 h-4" /> Back to Library
           </Link>
-          <h1 className="text-4xl font-bold text-white">{data.displayName}</h1>
-          <p className="text-xl text-indigo-300 mt-2">{data.story.intro}</p>
+          <h1 className="text-4xl font-bold text-ink-900 dark:text-white">{data.displayName}</h1>
+          <p className="text-xl text-indigo-600 dark:text-indigo-300 mt-2">{data.story.intro}</p>
         </div>
 
-        <Card className="p-8 border-indigo-500/20 bg-indigo-500/5">
+        <Card className="p-8 border-indigo-400/20 dark:border-indigo-500/20 bg-indigo-50/60 dark:bg-indigo-500/5">
           <div className="space-y-6">
             <div>
-              <h2 className="text-sm font-bold text-indigo-400 uppercase tracking-widest mb-2">The Theorem</h2>
-              <p className="text-lg text-slate-200 leading-relaxed font-serif bg-white/5 p-4 rounded-xl border border-white/10">
+              <h2 className="text-sm font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest mb-2">The Theorem</h2>
+              <p className="text-lg text-ink-800 dark:text-slate-200 leading-relaxed font-serif bg-ink-900/[0.04] dark:bg-white/5 p-4 rounded-xl border border-[color:var(--color-border)]">
                 {data.story.theoremStatement}
               </p>
             </div>
             
             <div>
-              <h2 className="text-sm font-bold text-cyan-400 uppercase tracking-widest mb-2">In Plain English</h2>
-              <p className="text-slate-300 leading-relaxed">
+              <h2 className="text-sm font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-widest mb-2">In Plain English</h2>
+              <p className="text-ink-700 dark:text-slate-300 leading-relaxed">
                 {data.story.plainEnglish}
               </p>
             </div>
 
             {data.story.applications && data.story.applications.length > 0 && (
               <div>
-                <h2 className="text-sm font-bold text-amber-400 uppercase tracking-widest mb-3">Applications</h2>
+                <h2 className="text-sm font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest mb-3">Applications</h2>
                 <ul className="space-y-3">
                   {data.story.applications.map((app, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 flex-shrink-0" />
-                      <span className="text-slate-300 leading-relaxed">{app}</span>
+                      <span className="text-ink-700 dark:text-slate-300 leading-relaxed">{app}</span>
                     </li>
                   ))}
                 </ul>

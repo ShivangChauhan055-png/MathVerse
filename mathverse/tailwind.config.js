@@ -3,9 +3,9 @@ module.exports = {
   content: ['./index.html', './src/**/*.{ts,tsx,js,jsx}'],
   darkMode: 'class',
   safelist: [
-    { pattern: /bg-(indigo|cyan|violet|emerald|amber|red|rose)-(400|500)\/(10|15|20|25)/ },
-    { pattern: /text-(indigo|cyan|violet|emerald|amber|red|rose)-(300|400|500)/ },
-    { pattern: /border-(indigo|cyan|violet|emerald|amber|red|rose)-(300|400|500)\/(30|50)/ },
+    { pattern: /bg-(indigo|cyan|violet|emerald|amber|red|rose|teal|green)-(50|100|400|500)\/(10|15|20|25|30)/ },
+    { pattern: /text-(indigo|cyan|violet|emerald|amber|red|rose|teal|green)-(300|400|500|600|700)/ },
+    { pattern: /border-(indigo|cyan|violet|emerald|amber|red|rose|teal|green)-(200|300|400|500)\/(20|30|50)/ },
   ],
   theme: {
     extend: {
@@ -23,6 +23,10 @@ module.exports = {
           900: '#152132',
           800: '#24354A',
           700: '#304357',
+          600: '#3d5268',
+          500: '#506478',
+          400: '#7a8fa0',
+          100: '#eef2f5',
         },
         paper: {
           50: '#fcfaf4',
